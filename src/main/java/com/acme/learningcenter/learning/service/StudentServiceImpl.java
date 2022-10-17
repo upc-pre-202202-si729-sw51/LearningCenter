@@ -4,13 +4,16 @@ import com.acme.learningcenter.learning.domain.model.entity.Student;
 import com.acme.learningcenter.learning.domain.persistence.StudentRepository;
 import com.acme.learningcenter.learning.domain.service.StudentService;
 import com.acme.learningcenter.shared.exception.ResourceNotFoundException;
+import com.acme.learningcenter.shared.exception.ResourceValidationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -44,16 +47,49 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student create(Student student) {
-        return null;
+
+        Set<ConstraintViolation<Student>> violations = validator.validate(student);
+
+        if (!violations.isEmpty())
+            throw new ResourceValidationException(ENTITY, violations);
+
+        // Name Uniqueness validation
+        Student studentWithName = studentRepository.findByName(student.getName());
+
+        if(studentWithName != null)
+            throw new ResourceValidationException(ENTITY,
+                    "An student with the same name already exists.");
+
+        return studentRepository.save(student);
     }
 
     @Override
     public Student update(Long studentId, Student request) {
-        return null;
+        Set<ConstraintViolation<Student>> violations = validator.validate(request);
+
+        if (!violations.isEmpty())
+            throw new ResourceValidationException(ENTITY, violations);
+
+        // Name Uniqueness validation
+        Student studentWithName = studentRepository.findByName(request.getName());
+
+        if(studentWithName != null && !studentWithName.getId().equals(studentId))
+            throw new ResourceValidationException(ENTITY,
+                    "An student with the same name already exists.");
+
+        return studentRepository.findById(studentId).map(student ->
+            studentRepository.save(
+                    student.withName(request.getName())
+                            .withAge(request.getAge())
+                            .withAddress(request.getAddress())))
+                .orElseThrow(() -> new ResourceNotFoundException(ENTITY, studentId));
     }
 
     @Override
     public ResponseEntity<?> delete(Long studentId) {
-        return null;
+        return studentRepository.findById(studentId).map(student -> {
+            studentRepository.delete(student);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, studentId));
     }
 }
