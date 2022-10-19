@@ -14,4 +14,5 @@ public interface SkillService {
     Skill create(Skill skill);
     Skill update(Long id, Skill skill);
     ResponseEntity<?> delete(Long skillId);
+    Skill addCriterionToSkill(Long skillId, String criterionName);
 }
