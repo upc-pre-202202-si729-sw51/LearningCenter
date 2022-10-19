@@ -44,7 +44,7 @@ public class Skill extends AuditModel {
 
         // Validate Criterion Name uniqueness for Skill
         if(!criteria.isEmpty()) {
-            if (criteria.stream().anyMatch(criterion -> criterion.getName().equals(criterionName) && criterion.getSkill().getId() == this.getId()))
+            if (criteria.stream().anyMatch(criterion -> criterion.getName().equals(criterionName)))
                 throw new ResourceValidationException("Criterion", "A criterion with the same name already exists");
         }
 
