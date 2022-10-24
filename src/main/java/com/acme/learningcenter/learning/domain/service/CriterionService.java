@@ -10,5 +10,7 @@ import java.util.List;
 public interface CriterionService {
     List<Criterion> getAll();
 
+    Criterion getByNameAndSkillId(String name, Long skillId);
+
     ResponseEntity<?> delete(Long skillId, Long criterionId);
 }

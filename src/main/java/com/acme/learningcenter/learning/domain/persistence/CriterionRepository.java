@@ -14,4 +14,6 @@ public interface CriterionRepository extends JpaRepository<Criterion, Long> {
     List<Criterion> findBySkillId(Long skillId);
     Page<Criterion> findBySkillId(Long skillId, Pageable pageable);
     Optional<Criterion> findByIdAndSkillId(Long id, Long skillId);
+
+    Optional<Criterion> findByNameAndSkillId(String name, Long skillId);
 }
