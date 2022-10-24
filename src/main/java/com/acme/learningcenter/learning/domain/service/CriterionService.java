@@ -9,9 +9,6 @@ import java.util.List;
 
 public interface CriterionService {
     List<Criterion> getAll();
-    List<Criterion> getAllBySkillId(Long skillId);
-    Page<Criterion> getAllBySkillId(Long skillId, Pageable pageable);
-    Criterion create(Long skillId, Criterion criterion);
-    Criterion update(Long skillId, Long criterionId, Criterion criterion);
+
     ResponseEntity<?> delete(Long skillId, Long criterionId);
 }
