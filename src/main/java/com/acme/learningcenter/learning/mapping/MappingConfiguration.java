@@ -14,4 +14,9 @@ public class MappingConfiguration {
     public SkillMapper skillMapper() {
         return new SkillMapper();
     }
+
+    @Bean
+    public CriterionMapper criterionMapper() {
+        return new CriterionMapper();
+    }
 }
