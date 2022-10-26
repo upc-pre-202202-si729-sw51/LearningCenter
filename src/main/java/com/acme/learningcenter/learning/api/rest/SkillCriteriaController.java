@@ -1,4 +1,4 @@
-package com.acme.learningcenter.learning.api;
+package com.acme.learningcenter.learning.api.rest;
 
 import com.acme.learningcenter.learning.domain.service.CriterionService;
 import com.acme.learningcenter.learning.domain.service.SkillService;
