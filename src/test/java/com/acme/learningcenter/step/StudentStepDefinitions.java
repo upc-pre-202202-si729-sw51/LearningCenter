@@ -76,4 +76,22 @@ public class StudentStepDefinitions {
         expectedResource.setId(actualResource.getId());
         assertThat(expectedResource).usingRecursiveComparison().isEqualTo(actualResource);
     }
+
+    @Given("An Student Resource with values {string}, {int}, {string} is already stored")
+    public void anStudentResourceWithValuesIsAlreadyStored(String name, int age, String address) {
+        CreateStudentResource resource = new CreateStudentResource()
+                .withName(name)
+                .withAge(age)
+                .withAddress(address);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<CreateStudentResource> request = new HttpEntity<>(resource, headers);
+        responseEntity = testRestTemplate.postForEntity(endpointPath, request, String.class);
+    }
+
+    @And("A Message is included in Response Body, with values {string}")
+    public void aMessageIsIncludedInResponseBodyWithValues(String expectedMessage) {
+        String responseBody = responseEntity.getBody();
+        assertThat(responseBody).contains(expectedMessage);
+    }
 }
