@@ -6,6 +6,7 @@ import com.acme.learningcenter.learning.mapping.StudentMapper;
 import com.acme.learningcenter.learning.resource.CreateStudentResource;
 import com.acme.learningcenter.learning.resource.StudentResource;
 import com.acme.learningcenter.learning.resource.UpdateStudentResource;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/students", produces = "application/json")
+@Tag(name = "Students", description = "Create, read, update and delete students")
 public class StudentsController {
     private final StudentService studentService;
 

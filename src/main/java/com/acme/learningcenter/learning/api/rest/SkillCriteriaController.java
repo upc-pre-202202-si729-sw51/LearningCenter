@@ -5,12 +5,14 @@ import com.acme.learningcenter.learning.domain.service.SkillService;
 import com.acme.learningcenter.learning.mapping.CriterionMapper;
 import com.acme.learningcenter.learning.resource.CreateCriterionResource;
 import com.acme.learningcenter.learning.resource.CriterionResource;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/skills/{skillId}/criteria")
+@RequestMapping(value = "/api/v1/skills/{skillId}/criteria", produces = "application/json")
+@Tag(name = "Skills", description = "Create, read, update and delete skills")
 public class SkillCriteriaController {
 
     private final SkillService skillService;
