@@ -1,4 +1,4 @@
-package com.acme.learningcenter.cucumber;
+package com.acme.learningcenter.test.cucumber;
 
 import com.acme.learningcenter.LearningCenterApplication;
 import io.cucumber.spring.CucumberContextConfiguration;

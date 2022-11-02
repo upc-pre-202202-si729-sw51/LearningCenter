@@ -1,4 +1,4 @@
-package com.acme.learningcenter.step;
+package com.acme.learningcenter.test.step;
 
 import com.acme.learningcenter.learning.resource.CreateStudentResource;
 import com.acme.learningcenter.learning.resource.StudentResource;
@@ -10,6 +10,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
@@ -22,7 +23,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @CucumberContextConfiguration
 public class StudentStepDefinitions {
 
-    @Autowired
+
+
     private TestRestTemplate testRestTemplate;
 
     @LocalServerPort
@@ -36,6 +38,7 @@ public class StudentStepDefinitions {
     @Given("The Endpoint {string} is available")
     public void theEndpointIsAvailable(String endpointPath) {
         this.endpointPath = String.format(endpointPath, randomServerPort);
+        testRestTemplate = new TestRestTemplate();
     }
 
 
