@@ -103,7 +103,7 @@
             <version>1.6.12</version>
         </dependency>
 
-        <!--
+
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-security</artifactId>
@@ -120,7 +120,7 @@
             <artifactId>jjwt-api</artifactId>
             <version>0.11.5</version>
         </dependency>
-        -->
+
 
 
         <dependency>
